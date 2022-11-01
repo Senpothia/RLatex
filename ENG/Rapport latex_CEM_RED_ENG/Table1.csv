@@ -1,0 +1,105 @@
+Ligne;C1;C2;C3;C4;C5
+1;Désignation;;;;
+2;Référence;;;;
+3;Num rapport;CEM ;;;
+4;Edition;0;;;
+5;Date;;;;
+6;Auteur;Michel LÓPEZ;;;
+7;Tension;;;;
+8;Consommation;;;;
+9;Version carte;;;;
+10;Température;;;;
+11;Pression;;;;
+12;Humidité;;;;
+13;EN 61000-4-4;Commentaire;Comportement;Résultat;
+14;BT;FC;1;C;0,5k
+15;BT;FC;1;C;1k
+16;BT;FC;1;C;2k
+17;BT;FC;1;C;3-4k
+18;TBTS;FC;1;C;0,5k
+19;TBTS;FC;1;C;1k
+20;TBTS;FC;1;C;2k
+21;TBTS;FC;1;C;3-4k
+22;Faisceau BT;FC;1;C;0,5k
+23;Faisceau BT;FC;1;C;1k
+24;Faisceau BT;FC;1;C;2k
+25;Faisceau BT;FC;1;C;3-4k
+26;Autres faisceaux;FC;1;C;0,5k
+27;Autres faisceaux;FC;1;C;1k
+28;Autres faisceaux;FC;1;C;2k
+29;Autres faisceaux;FC;1;C;3-4k
+30;EN 61000-4-5;Commentaire;Comportement;Résultat;
+31;MC - BT;FC;1;C;0,5k
+32;MC - BT;FC;1;C;1k
+33;MC - BT;FC;1;C;2k
+34;MC - BT;FC;1;C;3-4k
+35;MD - BT;FC;1;C;0,5k
+36;MD - BT;FC;1;C;1k
+37;Inter TBTS ;FC;1;C;0,5k
+38;Inter TBTS ;FC;1;C;1k
+39;Inter TBTS ;FC;1;C;2k
+40;Inter TBTS ;FC;1;C;3-4k
+41;Autres inter;FC;1;C;0,5k
+42;Autres inter;FC;1;C;1k
+43;Autres inter;FC;1;C;2k
+44;Autres inter;FC;1;C;3-4k
+45;EN 61000-4-2;Commentaire;Comportement;Résultat;
+46;H;FC;1;C;4k
+47;H;FC;1;C;5k
+48;H;FC;1;C;6k
+49;H;FC;1;C;8k
+50;V;FC;1;C;4k
+51;V;FC;1;C;5k
+52;V;FC;1;C;6k
+53;V;FC;1;C;8k
+54;Air;FC;1;C;4k
+55;Air;FC;1;C;8k
+56;Air;FC;1;C;12k
+57;Air;FC;1;C;15k
+58;Direct contact;FC;1;C;4k
+59;Direct contact;FC;1;C;5k
+60;Direct contact;FC;1;C;6k
+61;Direct contact;FC;1;C;8k
+62;EN 61000-4-3;Commentaire;Comportement;Résultat;
+63;3V/m;FC;1;C;
+64;10V/m;FC;1;C;
+65;EN 61000-4-6;Commentaire;Comportement;Résultat;
+66;140 dBuV;FC;1;C;
+67;EN 61000-4-11;Commentaire;Comportement;Résultat;
+68;+10  pour 100;FC;1;C;
+69;-15 pour 100;FC;1;C;
+70;60 pour 100;FC;1;C;
+71;100 pour 100;FC;1;C;
+72;Emission rayonnées;Commentaire;Comportement;Résultat;
+73;Horizontale;FC;1;C;
+74;Verticale;FC;1;C;
+75;Emission conduites;Commentaire;Comportement;Résultat;
+76;Phase;FC;1;C;
+77;Neutre;FC;1;C;
+78;Récapitulatif;;;;
+79;EN 61000-4-4;C;;;
+80;EN 61000-4-5;C;;;
+81;EN 61000-4-2;C;;;
+82;EN 61000-4-3;C;;;
+83;EN 61000-4-6;C;;;
+84;EN 61000-4-11;C;;;
+85;Em rayonnées;C;;;
+86;Em conduites;C;;;
+87;Harmoniques;N/A;;;
+88;Flickers;N/A;;;
+89;Pts ESD;1 à 5;;;
+90;Liste photos;;;;
+91;Produit;1;;;
+92;Produit;2;;;
+93;61000-4-4 BT;4-4BT;;;
+94;61000-4-4 faisceaux;4-4LI;;;
+95;61000-4-5BT;4-5BT;;;
+96;61000-4-5 inter conx;4-5LI;;;
+97;550022 conduit;55C;;;
+98;550022 rayonné;55R;;;
+99;61000-4-2;4-2;;;
+100;61000-4-2 points ;4-2pts;;;
+101;61000-4-6 ;4-6;;;
+102;61000-4-3;4-3;;;
+103;Harmoniques;3-2;;;
+104;Flickers;3-3;;;

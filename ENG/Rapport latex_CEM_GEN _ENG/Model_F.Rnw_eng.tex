@@ -1,0 +1,1288 @@
+
+% *****************************************************************************************************
+%
+%                            RAPPORT CEM
+%
+%                            MODELE Version ENG
+%
+%******************************************************************************************************
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{eso-pic}
+\usepackage{Sweave}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{lastpage}
+\usepackage{color}
+
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{tikz} % Filigrane
+\usepackage{watermark} % Filigrane - autre
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\blap}[1]{\vbox to 0pt{#1\vss}}
+\newcommand\AtUpperLeftCorner[3]{%
+  \put(\LenToUnit{#1},\LenToUnit{\dimexpr\paperheight-#2}){\blap{#3}}%
+}
+
+\newcommand\AtLowerLeftCorner[3]{%
+  \put(\LenToUnit{#1},\LenToUnit{\dimexpr\paperheight-#2}){\blap{#3}}%
+}
+
+
+ 
+\title{\Huge{\textbf{COMPLIANCE ASSESMENT WITH DIRECTIVE 2014/30/EU}}}
+\author{Michel LÓPEZ}
+\date{}
+\makeatletter
+
+% Numérotation 
+
+%\titleformat*{\section}{\large\sf\bfseries}
+ 
+\begin{document}
+\input{Model_F.Rnw_eng-concordance}
+
+
+
+% \SweaveOpts{concordance=TRUE}
+
+
+ % Page de garde **********************************************
+ 
+\begin{titlepage}
+    \enlargethispage{2cm}
+ 
+    \AddToShipoutPicture{
+        \AtUpperLeftCorner{0.5cm}{0cm}{\includegraphics[width=20cm]{bandeausup.jpg}}
+    \AtLowerLeftCorner{0.5cm}{26cm}{\includegraphics[width=20cm]{bandeauinf.jpg}}
+    }
+ 
+    \begin{center}
+        \vspace*{5cm}
+ 
+        \textsc{\@title} % Titre 
+        \HRule		% Trait de séparation
+
+        \vspace*{1.0cm}
+  \Large{ \textbf{Equipment name: }}\\
+   \Large{ \textbf{Part number: }}\\
+     \HRule		% Trait de séparation
+
+          \vspace*{0.5cm}
+  \Large{ \textbf{Test report no: CEM }}\\
+
+   \textsc{Release:0}\\
+   
+     \vspace*{0.5cm}
+        \Large{\@author} 
+        
+         \vspace*{0.5cm}
+        \large{\@date} 
+        
+    \end{center}
+ 
+    \vspace*{5cm}
+
+ 
+   % \begin{center}
+       % \makebox[\textwidth]{\includegraphics[width=\paperwidth]{bandeauinf.jpg}}
+ %   \end{center}
+
+ 
+\end{titlepage}
+
+\ClearShipoutPicture
+
+% Définition des pieds de pages
+
+%\lhead{Rapport de conformité}
+\rhead{\includegraphics[height=0.78cm,width=2.43cm]{logo.jpg} }
+\lhead{}
+\lfoot{CEM }
+\cfoot{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}
+%\renewcommand{\chaptermark}[1]{}
+\headsep = 30pt
+%\footsep = 35pt
+
+% Table des matières
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+
+% Début du rapport *******************************************
+
+\watermark % Filigrane sur toutes les pages
+{\begin{minipage}{17cm} % largeur du logo
+\vspace{22cm}
+\begin{center}
+\rotatebox{}{\includegraphics[scale=1]{CDVI_B1_10.jpg}}
+\end{center}
+\end{minipage}
+}
+
+
+\section{Purpose}
+
+
+The following test report presents all the results obtained at assesment test on \textbf{}. \\
+
+\section{List of standards and tests performed}
+
+Based on product standards :
+
+
+\begin{flushleft}
+\hspace{5cm}
+EN 61000-6-1:2007,\\
+\hspace{5cm}
+EN 61000-6-3:2007+A1:2011+AC:2012
+
+\end{flushleft}
+
+
+Applied test standards:
+
+
+\begin{flushleft}
+\hspace{5cm}
+EN 61000-4-2: 2009,\\
+\hspace{5cm}
+EN 61000-4-3: 2006 / A1 : 2008 / A2 : 2010,\\
+\hspace{5cm}
+EN 61000-4-4: 2012,\\
+\hspace{5cm}
+EN 61000-4-5: 2014 / A1 : 2017 ,\\
+\hspace{5cm}
+EN 61000-4-6: 2014,\\
+\hspace{5cm}
+EN 61000-4-11: 2004 / A1: 2017,\\
+\hspace{5cm}
+EN 55022:2010\\
+\hspace{5cm}
+EN 61000-3-2: 2014\\
+\hspace{5cm}
+EN 61000-3-3: 2013
+
+
+\end{flushleft}
+
+\vspace{0.8cm}
+
+% Tableau de tous les essais  --------------------------------------------------------------------------------------------------------
+
+
+\begin{center}
+\begin{tabular}{|l|c|l|c|}
+
+\hline
+ \large\textbf{Tests} &\large\textbf{Procedure} &\textbf{Severity of levels}& \\
+ 
+ \hline
+\multicolumn {4}{|c|}{\bf Immunity tests}\\
+ 
+\hline
+1. Repetitive electrical fast transients & EN 61000-4-4 & 2 kV on main; 1 kV on other circuits&A\\
+
+\hline
+2. Surge immunity test&EN 61000-4-5&2kV on main; 1kV on other circuits&A\\
+
+\hline
+3. Electrostatic discharge&EN 61000-4-2&8kV on the air; 6kV contact&A\\
+\hline
+
+4. Radiated electromagnetic field&EN 61000-4-3&  3V/m; 10V/m&A\\
+\hline
+
+
+5. Conducted disturbances&EN 61000-4-6&  3V/m; 10V/m&A\\
+\hline
+
+6. Voltage dips and variations&EN 61000-4-11&  60\%, 200ms; 100\%, 100ms&A\\
+\hline
+
+ \hline
+ \multicolumn {4}{|c|}{\bf Emission measurements}\\
+  \hline
+  
+ 7. Radiated emissions&EN 55022& Within the limits&A\\
+ \hline
+ 
+ 8. Conducted disturbances&EN 55022& Within the limits&A\\
+\hline
+
+\hline
+\multicolumn {4}{|c|}{\bf Other emission measurements}\\
+  \hline
+  
+ 9. Harmonic current emissions &EN 61000-3-2& Within the limits&N/A\\
+\hline
+
+ 10. Voltage fluctuations and flicker&EN 61000-3-3& Within the limits&N/A\\
+\hline
+
+\end{tabular}
+
+\end{center}
+
+% FIN tableau de tous les essais  ----------------------------------------------------------
+\\
+\noindent
+A: test case apply to the test object\\
+N/A : test case does not apply to the test object\\
+N/R : No performed\\
+\newpage
+
+\section{Description and features of the equipment under test} % *************  A REMPLIR  ********************
+
+
+
+
+
+
+
+
+
+
+% ************************************************************* FIN DE SECTION A REMPLIR  *****************************
+
+\\
+\noindent
+\textbf{Voltage supply :}\\
+\\
+\textbf{Consumption :}\\
+\\
+\textbf{Electronic card release :}\\
+\\
+
+
+\section{Wiring diagram}  %************* INCLURE SCHEMA DU MONTAGE DE TEST *********************
+
+\\
+\includegraphics[scale=1]{Montage.jpg}
+
+\section{Test setup} %******** A REMPLIR *********************************************
+
+
+
+
+
+
+
+
+
+
+% **************************************      FIN DE SECTION A REMPLIR   ***********************
+
+\section{Operating mode} %************ A REMPLIR *********************************************
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\
+
+%  ************************************     FIN DE SECTION A REMPLIR  **************************
+
+\section{Abbrevations used in this report} % ******************************************
+
+
+\begin{flushleft}
+FC : Normal behavor\\
+FI : Abnormal behavor\\
+P: Pass\\
+F : Fail\
+\end{flushleft}
+
+
+\textbf{Behavor criteria:}
+
+
+\begin{enumerate}
+\item normal behavor ;
+\item Temporary deterioration or self-recovering loss of function when the disturbance is removed ;
+\item Temporary deterioration or loss of function requiring a reset of the system or the intervention of an operator;
+\item Temporary deterioration or loss of non-recoverable function due to damage.
+\end{enumerate}
+
+
+\newpage
+
+% EN 61000-4-4   ************ Partie 1 - Secteur
+
+\section{Rapid transient immunity tests in bursts on supply circuits}
+\noindent
+Standard : EN 61000-4-4\\
+\\
+\noindent
+Test equipment: Haefely PEFT Junior}\\
+\\
+ 
+\subsection{Test conditions}
+\noindent
+See wiring diagram.\\
+\\
+tm : 5ns \\						
+td : 50ns\\
+Burts duration : 15ms\\
+Period: 300ms\\
+Test duration : 60s minimum\\
+
+% insérer tableau des couplages
+
+
+\subsection{Test results}
+
+
+\subsubsection{On power ports}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Level} &\Large\textbf{Voltage}& \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+1 & +/- 0.5 kV&FC&1&C\\
+
+\hline
+2 & +/- 1 kV&FC&1&C\\
+
+\hline
+3 & +/- 2 kV&FC&1&C\\
+
+\hline
+X & +/- 3--4 kV&FC&1&C\\
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+
+
+\subsubsection{On I/O signal, data and control ports}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Level} &\Large\textbf{Volatge}& \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+1 & +/- 0.5 kV&FC&1&C\\
+
+\hline
+2 & +/- 1 kV&FC&1&C\\
+
+\hline
+3 & +/- 2 kV&FC&1&C\\
+
+\hline
+X & +/- 3 -- 4 kV&FC&1&C\\
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+\newpage
+
+% EN 61000-4-4   ************ Partie 2 - Faisceaux 
+
+
+\section{Rapid transient immunity tests in bursts on lines and terminals}
+
+\noindent
+Standard: EN 61000-4-4\\
+\\
+\noindent
+Test equipment: Haefely PEFT Junior\\
+Decoupling network: Haefely 093 506-1\\
+\\
+
+ \subsection{Test conditions}
+\noindent
+See wiring diagram\\
+\\
+Rising time: 5ns\\
+Decreasing time: 50ns\\
+Burst duration : 15ms\\
+Period: 300ms\\
+Test duration: 60s minimum\\
+
+
+
+ \subsection{Test results}
+
+ \subsubsection{On I/O signal, data and control ports}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Level} &\Large\textbf{Voltage}& \Large\textbf{remark}&\Large\textbf{Behavor}&\Large\textbf{Verdict}\\
+ 
+\hline
+1 & +/- 0.5 kV&FC&1&C\\
+
+\hline
+2 & +/- 1 kV&FC&1&C\\
+
+\hline
+3 & +/- 2 kV&FC&1&C\\
+
+\hline
+X & +/- 3 -- 4 kV&FC&1&C\\
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+% EN 61000-4-5  - Partie 1 - Secteur  -----------------------------------------------------------
+
+
+\section{Surge test immunity on circuits}
+\noindent
+Standard : EN 61000-4-5\\
+\\
+\noindent
+Test equipment:  
+\\
+Profline système SCHAFFNER\\
+NSG 2050, PNW 2055 \\
+Surge wave : 8/20$\mu$s \\
+
+
+\subsection{Common mode test conditions}
+\noindent
+See wiring diagramm\\
+Number of surges : 5 / phase angle\\
+Delay beetween surges : 1 /mn\\
+Source impedance : 12 Ohms \\
+Coupling: L-PE; N-PE; L-N-PE\\
+
+
+
+ \subsection{Test results}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Class} &\Large\textbf{Voltage}& \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+1 & +/- 0.5 kV&FC&1&C\\
+
+\hline
+ 2 & +/- 1 kV&FC&1&C\\
+
+\hline
+3 & +/- 2 kV&FC&1&C\\
+
+\hline
+X & +/- 3 -- 4 kV&FC&1&C\\
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+ \subsection{Differentiel mode test conditions}
+\noindent
+Nomber of surges : 5\\
+Delay beetween surges: 1 /mn\\
+Source impedance : 2 Ohms \\
+\\
+
+ \subsection{Test results}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Class} &\Large\textbf{Voltage}& \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+1 & +/- 0.5 kV&FC&1&C\\
+
+\hline
+ 2 & +/- 1 kV&FC&1&C\\
+
+
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+\newpage
+
+% EN 61000-4-5  - Partie 1 - Lignes d'interconnexions  --------------------------------------
+
+
+\section{Surge test immunity on on lines and terminals}
+\noindent
+Standard : EN 61000-4-5\\
+\\
+\noindent
+Test equipment:
+Profline système SCHAFFNER\\
+NSG 2050 / PNW 2055 \\
+Surge wave: 8/20$\mu$s\\
+Coupling network CDN 117, INA 170, INA 2055\\
+
+
+\subsection{Test conditions}
+\noindent
+See wiring diagram\\
+\\
+\noindent
+Number of surges: 5\\
+Delay between surges : 1 min\\
+Source impedance : 2 ohms\\
+Common mode: 40 Ohms + 0,5$\mu$F\\
+\\
+
+\subsection{Surge test on lines and terminals}
+
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Class} &\Large\textbf{Voltage}& \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+1 & +/- 0.5 kV&FC&1&C\\
+
+\hline
+ 2 & +/- 1 kV&FC&1&C\\
+
+\hline
+ 3 & +/- 2 kV&FC&1&C\\
+ 
+\hline
+
+X & +/- 3 kV -- 4kV&FC&1&C\\
+ 
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+
+
+
+\newpage
+
+
+
+
+
+% EN 61000-4-2  -    Décharge indirectes au contact
+
+\section{Electrostatic discharge immunity tests}
+
+
+\subsection{Indirect contact discharges}
+\noindent
+Standard : EN 61000-4-2\\
+\\
+\noindent
+Test equipment :  
+Haefely PSB 25B\\
+Cd+Cs =150pF ; Rd=330 Ohms\\
+ \\
+ 
+ \subsubsection{Test conditions}
+\noindent
+See wiring diagram\\
+10 contact discharges per point on the horizontal plane\\ 
+10 contact discharges per point on vertical plane\\
+\\
+\noindent
+For test points location, refer  \S{}20
+\\
+
+
+ \subsubsection{Test results}
+ 
+ \textbf{Discharges on horizontal plane}
+ 
+ 
+ \begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Points} &\Large\textbf{Voltage}& \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+1--4& +/- 4 kV&FC&1&C\\
+
+\hline
+1--4& +/- 5 kV&FC&1&C\\
+
+\hline
+1--4& +/- 6 kV&FC&1&C\\
+ 
+ \hline
+
+1--4& +/- 8 kV&FC&1&C\\
+ 
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+ 
+ \textbf{Discharges on vertical plane}
+ 
+ 
+ \begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Points} &\Large\textbf{Voltage}& \Large\textbf{remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+1--4& +/- 4 kV&FC&1&C\\
+
+\hline
+1--4& +/- 5 kV&FC&1&C\\
+
+\hline
+1--4& +/- 6 kV&FC&1&C\\
+ 
+ \hline
+
+1--4& +/- 8 kV&FC&1&C\\
+ 
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\subsection{Direct discharges}
+
+\subsubsection{Test conditions}
+\noindent
+See wiring diagram\\
+10 contact discharges per point \\
+10 discharges per point in the air\\
+\\
+\noindent
+For test points location, refer \S{}20
+\\
+\\
+
+% PHOTO DES POINTS DE TEST  ******************************************************************
+
+
+
+
+%*******************************************************************************************
+
+
+\subsubsection{Test results}
+
+
+ \textbf{Air discharges}
+ 
+ \begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Points} &\Large\textbf{Voltage}& \Large\textbf{Remark}&\Large\textbf{Results}&\Large\textbf{verdict}\\
+ 
+\hline
+1 à 5& +/- 4 kV&FC&1&C\\
+
+\hline
+1 à 5& +/- 8 kV&FC&1&C\\
+
+\hline
+1 à 5& +/- 12 kV&FC&1&C\\
+ 
+ \hline
+
+1 à 5& +/- 15 kV&FC&1&C\\
+ 
+\hline
+
+
+
+\end{tabular}
+\end{center}
+ 
+ 
+  \textbf{Contact discharges}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Points} &\Large\textbf{Voltage}& \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+1 à 5& +/- 4 kV&FC&1&C\\
+
+\hline
+1 à 5& +/- 5 kV&FC&1&C\\
+
+\hline
+1 à 5& +/- 6 kV&FC&1&C\\
+ 
+ \hline
+
+1 à 5& +/- 8 kV&FC&1&C\\
+ 
+\hline
+
+\end{tabular}
+\end{center}
+ 
+
+
+\newpage
+
+% EN 61000-4-3  -    Test d'immunité aux champs électromagnétiques rayonnés
+
+\section{Radiated, radio-frequency, electromagnetic field immunity test}
+\noindent
+Standard : EN 61000-4-3\\
+\\
+\noindent
+Test equipment : \\
+SML02 ROHDE \& SCHWARZ
+AmplifierWA1000\\
+Antenne AS2 ; probe PCB\\
+Probe H-fied: PR 1000\\
+
+\subsection{Test conditions}
+\noindent
+See wiring diagram\\
+Severity : 3V/m ou 10V/m\\
+Frequency range: 30MHz à 1Ghz\\
+Modulation: 80\% 1kHz sinusoîdal\\
+\\
+\\
+
+\subsection{Test results}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Level} & \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+3 V/m &FC&1&C\\
+
+\hline
+ 10V/m &FC&1&C\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+	
+\newpage
+
+% EN 61000-4-6  -    Test d'immunité aux champs électromagnétiques conduits
+
+
+
+\section{Immunity to conducted disturbances, induced by radio-frequency fields}
+\noindent
+Standard : EN 61000-4-6\\
+\\
+\noindent
+Test equipment: \\ 
+SML02 ROHDE \& SCHWARZ
+Amplificateur MRF 80\\
+Coupling network: CDN 1 et attenuator - 6 dB\\
+\\
+\\
+
+
+\subsection{Test conditions}
+\noindent
+See wiring diagram\\
+\\	
+Level : 140 dB$\mu$V / 10V rms ; 129.5 dB$\mu$V / 3V rms\\
+Frequency range  : balayage de 0.15 MHz à 80 MHz\\
+Modulation: 80 \% 1kHz sinusoîdal\\
+Pulse modulation:  1Hz 0.5s ON; 0.5s OFF\\
+\\
+
+
+\subsection{test results}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Level} & \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+140dB$\mu$V &FC&1&C\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+	
+\newpage
+
+% EN 61000-4-6  -    Test d'immunité aux variations de tension
+
+\section{Voltage variations immunity tests}
+\noindent
+Standard : EN 61000-4-11\\
+\\
+\noindent
+Test equipment:  108-TMX SCHAFFNER\\
+Drived by: NSG 1006\\
+\\
+
+\subsection{Test conditions}
+\noindent
+See wiring diagram\\
+Level: 230V  +10\%, 230 V - 15\%
+
+\subsection{Test results}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Level}&\large\textbf{Duration}& \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
++10\% &10 s&FC&1&C\\
+
+
+\hline
+
+\hline
+-15\% &10 s&FC&1&C\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+\newpage
+
+% EN 61000-4-6  -    Test d'immunité aux chutes et creux de tension
+
+
+\section{Voltage dips, short interruptions immunity tests}
+\noindent
+Standard : EN 61000-4-11\\
+\\
+\noindent
+Test equipment: 108-TMX SCHAFFNER\\
+Drived by: NSG 1006\\
+\\
+
+\subsection{Test conditions}
+\noindent
+See wiring diagram\\
+\\
+Applied on main supply voltage circuit\\
+Duration of voltage shorts: 10 ; 20 ; 100 ; 200 ms \\
+Duration of volatge dips: 10 ; 20 ; 100 ms\\
+Number of voltage fluctuations: 3 /durée\\
+Delay between fluctuations : 10s\\
+\\
+
+
+\subsection{Test results}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Level}&\large\textbf{Duration} & \Large\textbf{Remark}&\Large\textbf{Result}&\Large\textbf{Verdict}\\
+ 
+\hline
+60\% &0,5; 1;5;10 periods&FC&1&C\\
+
+
+\hline
+
+\hline
+100\% &0,5; 1; 5 periods &FC&1&C\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+\newpage
+
+% MESURES D'EMISSIONS   ******************************
+
+% EMISSIONS RAYONNEES  
+
+\section{Radiated emission measurements}
+\noindent
+Standard : EN 55022 Classe B\\
+\\
+Test equipment:  
+xxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxx
+\\
+\subsection{Test conditions}
+\noindent
+See wiring diagram\\
+Bandwith : 120kHz\\
+Frequency range : 30MHz  -- 1GHz\\
+
+\\
+
+
+\subsection{Test results}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+
+\hline
+ \large\textbf{Level}& \large\textbf{Polarity}& \Large\textbf{Remark}&\Large\textbf{Verdict}\\
+ 
+\hline
+Voir graphe&Horizontale&1&C\\
+
+
+\hline
+Voir graphe&Verticale&1&C\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+\textbf{Measurements in horizontal polarity}
+
+% Gaphe Horizontale
+\\
+\includegraphics[scale=1]{ERH.png}
+\\
+
+%\\
+%\includegraphics[scale=1]{ERH24AC.png}
+%\\
+
+
+
+%------------------------------------------------------------------------------------------------
+
+% Gaphe vertical
+\textbf{Measurements in vertical polarity}
+\\
+\\
+\includegraphics[scale=1]{ERV.png}
+\\
+
+%\\
+%\includegraphics[scale=1]{ERV24AC.png}
+%\\
+\\
+\newpage
+
+
+
+%------------------------------------------------------------------------------------------------
+
+
+
+
+\newpage
+
+% EMISSIONS CONDUITES
+
+\section{Conducted emission measurements}
+\noindent
+Standard : 55022 Classe B\\
+\\
+\noindent
+Test equipment: 
+*********************
+***************
+\\
+
+\subsection{Test conditions}
+\noindent
+See wiring diagram\\
+Bandwith: 9 kHz\\
+Frequency range: 0.15 MHz -- 30 MHz\\
+\\
+
+
+\subsection{Test results}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+
+\hline
+ \large\textbf{Level}& \large\textbf{Polarity}& \Large\textbf{Remark}&\Large\textbf{Verdict}\\
+ 
+\hline
+See graph&Phase&1&C\\
+
+
+\hline
+See graph&Neutral&1&C\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+\textbf{Measurements on phase}
+
+% Gaphe Phase
+
+\\
+\includegraphics[scale=1]{ECL.png}
+\\
+
+%\\
+%\includegraphics[scale=1]{ECL24AC.png}
+
+%------------------------------------------------------------------------------------------------
+
+
+\textbf{Measurements on neutral}
+
+% Gaphe Neutre
+\\
+\includegraphics[scale=1]{ECN.png}
+
+%\\
+%\includegraphics[scale=1]{ECN24AC.png}
+\\
+
+
+
+%------------------------------------------------------------------------------------------------
+
+
+\newpage
+
+
+% RECAPITULATIF DES RESULTATS D'ESSAIS
+
+% Tableau de tous les essais  --------------------------------------------------------------------------------------------------------
+
+\section{Summary of test results and compliance notice}
+
+\vspace{1.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+
+\hline
+ \large\textbf{Test} &\Large\textbf{ Procedure} & \Large\textbf{ Result}\\
+ 
+ \hline
+ \multicolumn {3}{|c|}{\bf Immunity tests}\\
+ 
+\hline
+1. Repetitive electrical fast transients & EN 61000-4-4&C\\
+
+\hline
+2. Surge immunity test &EN 61000-4-5&C\\
+
+\hline
+3. Electrostatic discharge &EN 61000-4-2&C\\
+\hline
+
+4. Radiated electromagnetic field &EN 61000-4-3&C\\
+\hline
+
+
+5. Conducted disturbances &EN 61000-4-6&C\\
+\hline
+
+6. Voltage dips and variations &EN 61000-4-11&C\\
+\hline
+
+ \hline
+\multicolumn {3}{|c|}{\bf Emission measurements}\\
+  \hline
+  
+ 7. Radiated emissions &EN 55022&C\\
+ \hline
+ 
+ 8. Conducted disturbances &EN 55022&C\\
+\hline
+
+\hline
+\multicolumn {3}{|c|}{\bf Other emission measurements}\\
+  \hline
+  
+ 9. Harmonic current emissions &EN 61000-3-2&N/A\\
+\hline
+
+ 10. Voltage fluctuations and flicker &EN 61000-3-3&N/A\\
+\hline
+
+\end{tabular}
+
+\end{center}
+
+\vspace{1.0cm}
+
+Le \textbf{} complies with european directive 2014/30/UE. 
+
+% FIN tableau de tous les essais
+
+\newpage
+
+ % DOCUMENTS PHOTOGRAPHIQUES
+ 
+ 
+
+\section{Internal and external photographs of the EUT}
+
+\\
+
+\center
+\includegraphics[scale=1]{1.jpg}
+\\
+\includegraphics[scale=1]{11.jpg}
+\\
+\includegraphics[scale=1]{12.jpg}
+\\
+\\
+
+\caption{Fig 1 -- Photos du clavier PROFIL100EC}
+
+
+\includegraphics[scale=1]{2.jpg}
+\\
+\caption{Fig 2 -- Boitier électronique déporté}
+
+\includegraphics[scale=1]{21.jpg}
+\\
+\caption{Fig 3 -- Carte électronique dans le boitier déporté}
+\\
+\includegraphics[scale=1]{22.jpg}
+\\
+\caption{Fig 4 -- Carte électronique face composants}
+\\
+\includegraphics[scale=1]{23.jpg}
+\\
+\caption{Fig 5 -- Carte électronique face soudures}
+\\
+
+\newpage
+
+\section{Test photographs}
+
+\includegraphics[scale=1]{4-4BT.jpg}
+\\
+\caption{Fig 6 -- Repetitive electrical fast transients test immunity on primary circuits}
+
+\\
+
+%\includegraphics[scale=1]{4-4LI.jpg}
+%\\
+%\caption{Fig 4 -- Repetitive electrical fast transients test immunity on I/O ports and terminals}
+
+
+
+
+\includegraphics[scale=1]{55C.jpg}
+\\
+\caption{Fig 7 -- Conducted emissions measurement}
+
+\newpage
+
+
+
+
+\includegraphics[scale=1]{4-2.jpg}
+\\
+\caption{Fig 8 -- Electrostatic discharge test immunity}
+
+\newpage
+
+
+\\
+\includegraphics[scale=1]{4-2pts.jpg}
+\\
+\caption{Fig 9 -- Test points location for Electrostatic discharge test immunity}
+\newpage
+
+
+\\
+
+
+\includegraphics[scale=0.5]{4-5LI.jpg}
+\\
+\caption{Fig 11 -- Surge immunity test on I/O ports and terminals}
+
+\includegraphics[scale=0.5]{4-6.jpg}
+\\
+\caption{Fig 12 -- Conducted disturbances, induced by radio-frequency fields immunity test}
+ 
+ 
+\includegraphics[scale=0.5]{4-3.jpg}
+
+\caption{Fig 13 -- Radiated, radiofrequency, electromagnetic field immunity test}
+
+
+
+\end{document}
+

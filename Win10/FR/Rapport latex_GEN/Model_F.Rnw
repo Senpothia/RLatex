@@ -1,0 +1,1367 @@
+
+% *****************************************************************************************************
+%
+%                            RAPPORT CEM
+%
+%                            MODELE
+%
+%******************************************************************************************************
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{eso-pic}
+\usepackage{Sweave}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{lastpage}
+\usepackage{color}
+
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{tikz} % Filigrane
+\usepackage{watermark} % Filigrane - autre
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\blap}[1]{\vbox to 0pt{#1\vss}}
+\newcommand\AtUpperLeftCorner[3]{%
+  \put(\LenToUnit{#1},\LenToUnit{\dimexpr\paperheight-#2}){\blap{#3}}%
+}
+
+\newcommand\AtLowerLeftCorner[3]{%
+  \put(\LenToUnit{#1},\LenToUnit{\dimexpr\paperheight-#2}){\blap{#3}}%
+}
+
+
+<<Lecture,echo=FALSE>>=
+
+TAB<-read.table("Table1.csv",header=TRUE,sep=";",dec=",")
+attach(TAB)
+val<-"N/A"
+C3<-as.character(TAB[,3])
+APP<-vector("character", 10)
+for (i in 1:10) {
+  
+  if(C3[78+i]==val) APP[i]=val else APP[i]="A"
+  
+}
+
+res<-""
+c<-TAB[79:88,3]
+c<-as.character(c)
+vec<-c=="NC"
+if (any(vec)==TRUE) res<-"n'est pas conforme à la directive 2014/30/UE." else res<-"est conforme à la directive 2014/30/UE."
+
+@
+ 
+\title{\Huge{\textbf{EVALUATION DE CONFORMITE A LA DIRECTIVE 2014/30/UE}}}
+\author{\Sexpr{TAB[6,3]}}
+\date{\Sexpr{TAB[5,3]}}
+\makeatletter
+
+% Num\'erotation 
+
+%\titleformat*{\section}{\large\sf\bfseries}
+ 
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+
+
+% \SweaveOpts{concordance=TRUE}
+
+
+ % Page de garde **********************************************
+ 
+\begin{titlepage}
+    \enlargethispage{2cm}
+ 
+    \AddToShipoutPicture{
+        \AtUpperLeftCorner{0.5cm}{0cm}{\includegraphics[width=20cm]{bandeausup.jpg}}
+    \AtLowerLeftCorner{0.5cm}{26cm}{\includegraphics[width=20cm]{bandeauinf.jpg}}
+    }
+ 
+    \begin{center}
+        \vspace*{5cm}
+ 
+        \textsc{\@title} % Titre 
+        \HRule		% Trait de s\'eparation
+
+        \vspace*{1.0cm}
+  \Large{ \textbf{Equipement: \Sexpr{TAB[1,3]}}}\\
+   \Large{ \textbf{R\'ef\'erence: \Sexpr{TAB[2,3]}}}\\
+     \HRule		% Trait de s\'eparation
+
+          \vspace*{0.5cm}
+  \Large{ \textbf{Num\'ero: \Sexpr{TAB[3,3]}}}\\
+
+   \textsc{Edition:\Sexpr{TAB[4,3]}}\\
+   
+     \vspace*{0.5cm}
+        \Large{\@author} 
+        
+         \vspace*{0.5cm}
+        \large{\@date} 
+        
+    \end{center}
+ 
+    \vspace*{5cm}
+
+ 
+   % \begin{center}
+       % \makebox[\textwidth]{\includegraphics[width=\paperwidth]{bandeauinf.jpg}}
+ %   \end{center}
+
+ 
+\end{titlepage}
+
+\ClearShipoutPicture
+
+% D\'efinition des pieds de pages
+
+%\lhead{Rapport de conformit\'e}
+\rhead{\includegraphics[height=0.78cm,width=2.43cm]{logo.jpg} }
+\lhead{\Sexpr{TAB[1,3]}}
+\lfoot{\Sexpr{TAB[3,3]}}
+\cfoot{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}
+%\renewcommand{\chaptermark}[1]{}
+\headsep = 30pt
+%\footsep = 35pt
+
+% Table des matières
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+
+% D\'ebut du rapport *******************************************
+
+\watermark % Filigrane sur toutes les pages
+{\begin{minipage}{17cm} % largeur du logo
+\vspace{22cm}
+\begin{center}
+\rotatebox{}{\includegraphics[scale=1]{CDVI_B1_10.jpg}}
+\end{center}
+\end{minipage}
+}
+
+
+\section{Objet}
+
+
+Ce rapport pr\'esente les r\'esultats aux essais de compatibilit\'e \'electromagn\'etique r\'ealis\'es sur le \textbf{\Sexpr{TAB[1,3]}}. \\
+
+\section{Liste des normes et essais appliqu\'es}
+
+Normes de produit appliqu\'ees :
+
+
+\begin{flushleft}
+\hspace{5cm}
+EN 61000-6-1:2007,\\
+\hspace{5cm}
+EN 61000-6-3:2007
+
+\end{flushleft}
+
+
+Normes fondamentales appliqu\'ees :
+
+
+\begin{flushleft}
+\hspace{5cm}
+EN 61000-4-2: 2009,\\
+\hspace{5cm}
+EN 61000-4-3: 2006 / A1 : 2008 / A2 : 2010,\\
+\hspace{5cm}
+EN 61000-4-4: 2012,\\
+\hspace{5cm}
+EN 61000-4-5: 2014 / A1 : 2017,\\
+\hspace{5cm}
+EN 61000-4-6: 2014,\\
+\hspace{5cm}
+EN 61000-4-11: 2004 / A1 : 2017,\\
+\hspace{5cm}
+EN 55022:2010\\
+\hspace{5cm}
+EN 61000-3-2: 2014\\
+\hspace{5cm}
+EN 61000-3-3: 2013
+
+
+\end{flushleft}
+
+\vspace{0.8cm}
+
+% Tableau de tous les essais  --------------------------------------------------------------------------------------------------------
+
+
+\begin{center}
+\begin{tabular}{|l|c|l|c|}
+
+\hline
+ \large\textbf{Essais} &\large\textbf{ Proc\'edure} &\large\textbf{ Crit\'ere d acceptation}& \\
+ 
+ \hline
+\multicolumn {4}{|c|}{\bf Tests d'immunit\'e}\\
+ 
+\hline
+1. Transistoires rapides en salves & EN 61000-4-4 & 2 kV sur secteur; 1 kV autres circuits&\Sexpr{APP[1]}\\
+
+\hline
+2. Ondes de choc&EN 61000-4-5&2kV sur secteur; 1kV sur autres circuits&\Sexpr{APP[2]}\\
+
+\hline
+3. D\'echarges \'electrostatiques&EN 61000-4-2&8kV dans l air; 6kV au contatct&\Sexpr{APP[3]}\\
+\hline
+
+4. Immunit\'e aux champs rayonn\'es&EN 61000-4-3&  3V/m; 10V/m&\Sexpr{APP[4]}\\
+\hline
+
+
+5. Immunit\'e aux champs conduits&EN 61000-4-6&  3V/m; 10V/m&\Sexpr{APP[5]}\\
+\hline
+
+6. Immunit\'e aux variations de tensions&EN 61000-4-11&  60\%, 200ms; 100\%, 100ms&\Sexpr{APP[6]}\\
+\hline
+
+ \hline
+ \multicolumn {4}{|c|}{\bf Mesures d'emissions}\\
+  \hline
+  
+ 7. Emissions rayonn\'ees&EN 55022&  Dans le gabarit&\Sexpr{APP[7]}\\
+ \hline
+ 
+ 8. Emissions conduites&EN 55022&  Dans le gabarit&\Sexpr{APP[8]}\\
+\hline
+
+\hline
+\multicolumn {4}{|c|}{\bf Autres tests}\\
+  \hline
+  
+ 9. Harmoniques de courant&EN 61000-3-2&  Dans le gabarit&\Sexpr{APP[9]}\\
+\hline
+
+ 10. Fluctuation de tension, flickers&EN 61000-3-3&  Dans le gabarit&\Sexpr{APP[10]}\\
+\hline
+
+\end{tabular}
+
+\end{center}
+
+% FIN tableau de tous les essais  ----------------------------------------------------------
+\\
+\noindent
+A: Essai applicable\\
+N/A : Essai non applicable
+N/R : Non r\'ealis\'e
+\newpage
+
+\section{Description et caract\'eristiques de l'\'equipement sous test} % *************  A REMPLIR  ********************
+
+
+
+
+
+
+
+
+
+
+% ************************************************************* FIN DE SECTION A REMPLIR  *****************************
+
+\\
+\noindent
+\textbf{Tension d'alimentation :\Sexpr{TAB[7,3]}}\\
+\\
+\textbf{Consommation :\Sexpr{TAB[8,3]}}\\
+\\
+
+\\
+\textbf{Version carte \'electronique :\Sexpr{TAB[9,3]}}\\
+\\
+
+
+\section{Montage d'essai}  %************* INCLURE SCHEMA DU MONTAGE DE TEST *********************
+
+\textbf{Sch\'ema du montage de test:}
+\\
+\includegraphics[scale=1]{Montage.jpg}
+
+\section{Configuration de test} %******** A REMPLIR *********************************************
+
+
+
+
+
+
+
+
+
+
+% **************************************      FIN DE SECTION A REMPLIR   ***********************
+
+\section{Mode op\'eratoire} %************ A REMPLIR *********************************************
+
+Les codes programm\'es et d'autres codes choisis au hazard sont tap\'es au clavier avant, pendant et après l'application des perturbations de tests afin de v\'erifier la r\'eaction du clavier. 
+En fin de test, le clavier doit retrouver un fonctionnement normal. Il ne doit pr\'esenter aucune alt\'eration des param\'etres pr\'e-d\'efinis
+
+
+%  ************************************     FIN DE SECTION A REMPLIR  **************************
+
+\section{Abr\'eviations utilis\'ees dans ce rapport} % ******************************************
+
+
+\begin{flushleft}
+FC : Fonctionnement conforme\\
+FI : Fonctionnement incorrect\\
+C: Conforme\\
+NC : Non conforme\
+\end{flushleft}
+
+
+\textbf{Critère de comportement :}
+
+
+\begin{enumerate}
+\item Comportement normal ;
+\item D\'egradation temporaire ou perte de fonction auto r\'ecup\'erable lorsque la pertubation est retir\'ee ;
+\item D\'egradation temporaire ou perte de fonction n\'ec\'essitant une remise a z\'ero du systeme ou l intervention d un op\'erateur ;
+\item D\'egradation temporaire ou perte de fonction non r\'ecup\'erable du fait d une avarie.
+\end{enumerate}
+
+
+\newpage
+
+% EN 61000-4-4   ************ Partie 1 - Secteur
+
+\section{Tests d'immunit\'e aux transistoires rapides en salves sur les circuits d'alimentation}
+\noindent
+Norme de base : EN 61000-4-4\\
+\\
+\noindent
+Equipement de test:  Simulateur de perturbations Haefely PEFT Junior}\\
+\\
+ 
+\subsection{Conditions de test}
+\noindent
+Selon montage de test et mode op\'eratoire.\\
+\\
+tm : 5ns \\						
+td : 50ns\\
+Dur\'ee salve : 15ms\\
+P\'eriode : 300ms\\
+Dur\'ee essai par couplage : 60s minimum\\
+
+% ins\'erer tableau des couplages
+
+
+\subsection{R\'esultats de test}
+
+
+\subsubsection{Sur les entr\'ees du r\'eseaux d'alimentation BT}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Niveau} &\Large\textbf{ Tension}& \Large\textbf{ Commentaire}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+1 & +/- 0.5 kV&\Sexpr{TAB[14,3]}&\Sexpr{TAB[14,4]}&\Sexpr{TAB[14,5]}\\
+
+\hline
+2 & +/- 1 kV&\Sexpr{TAB[15,3]}&\Sexpr{TAB[15,4]}&\Sexpr{TAB[15,5]}\\
+
+\hline
+3 & +/- 2 kV&\Sexpr{TAB[16,3]}&\Sexpr{TAB[16,4]}&\Sexpr{TAB[16,5]}\\
+
+\hline
+X & +/- 3--4 kV&\Sexpr{TAB[17,3]}&\Sexpr{TAB[17,4]}&\Sexpr{TAB[17,5]}\\
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+
+
+\subsubsection{Sur entr\'ees d'alimentation TBTS }
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Niveau} &\Large\textbf{ Tension}& \Large\textbf{ Commentaire}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+1 & +/- 0.5 kV&\Sexpr{TAB[18,3]}&\Sexpr{TAB[18,4]}&\Sexpr{TAB[18,5]}\\
+
+\hline
+2 & +/- 1 kV&\Sexpr{TAB[19,3]}&\Sexpr{TAB[19,4]}&\Sexpr{TAB[19,5]}\\
+
+\hline
+3 & +/- 2 kV&\Sexpr{TAB[20,3]}&\Sexpr{TAB[20,4]}&\Sexpr{TAB[20,5]}\\
+
+\hline
+X & +/- 3 -- 4 kV&\Sexpr{TAB[21,3]}&\Sexpr{TAB[21,4]}&\Sexpr{TAB[21,5]}\\
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+\newpage
+
+% EN 61000-4-4   ************ Partie 2 - Faisceaux 
+
+
+\section{Tests d'immunit\'e aux transistoires rapides en salves sur les faisceaux}
+
+\noindent
+Norme de base : EN 61000-4-4\\
+\\
+\noindent
+Equipement de test: Simulateur de perturbations Haefely PEFT Junior\\
+Pince de couplage: Haefely 093 506-1\\
+\\
+
+ \subsection{Conditions de test}
+\noindent
+Selon montage de test et mode op\'eratoire\\
+\\
+tm : 5ns\\
+td : 50ns\\
+Dur\'ee salve : 15ms\\
+P\'eriode : 300ms\\
+Dur\'ee essai par couplage : 60s minimum\\
+
+
+
+ \subsection{R\'esultats de test}
+
+ \subsubsection{Sur les entr\'ees d'alimentation TBTS }
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Niveau} &\Large\textbf{ Tension}& \Large\textbf{ Commentaire}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+1 & +/- 0.5 kV&\Sexpr{TAB[22,3]}&\Sexpr{TAB[22,4]}&\Sexpr{TAB[22,5]}\\
+
+\hline
+2 & +/- 1 kV&\Sexpr{TAB[23,3]}&\Sexpr{TAB[23,4]}&\Sexpr{TAB[24,5]}\\
+
+\hline
+3 & +/- 2 kV&\Sexpr{TAB[24,3]}&\Sexpr{TAB[24,4]}&\Sexpr{TAB[24,5]}\\
+
+\hline
+X & +/- 3 -- 4 kV&\Sexpr{TAB[25,3]}&\Sexpr{TAB[25,4]}&\Sexpr{TAB[25,5]}\\
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+
+ \subsubsection{Sur autres faisceaux}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Niveau} &\Large\textbf{ Tension}& \Large\textbf{ Commentaire}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+1 & +/- 0.5 kV&\Sexpr{TAB[26,3]}&\Sexpr{TAB[26,4]}&\Sexpr{TAB[26,5]}\\
+
+\hline
+ 2 & +/- 1 kV&\Sexpr{TAB[27,3]}&\Sexpr{TAB[27,4]}&\Sexpr{TAB[27,5]}\\
+
+\hline
+3 & +/- 2 kV&\Sexpr{TAB[28,3]}&\Sexpr{TAB[28,4]}&\Sexpr{TAB[28,5]}\\
+
+\hline
+X & +/- 3 -- 4 kV&\Sexpr{TAB[29,3]}&\Sexpr{TAB[29,4]}&\Sexpr{TAB[29,5]}\\
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+\newpage
+
+% EN 61000-4-5  - Partie 1 - Secteur  -----------------------------------------------------------
+
+
+\section{Tests d'immunit\'e aux ondes de choc sur les entr\'ees du r\'eseau d'alimentation BT}
+\noindent
+Norme de base : EN 61000-4-5\\
+\\
+\noindent
+Equipement de test :  Profline système SCHAFFNER\\
+NSG 2050 avec tiroir PNW 2055 \\
+Onde de choc : 8/20$\mu$s \\
+Transformateur d'isolement\\
+
+ \subsection{Conditions de test en mode commun}
+\noindent
+Suivant montage de test et mode op\'eratoire\\
+Niveau de tension : 0,5kV à 4kV\\
+Nombre d'impulsions appliqu\'ees : 5/ essai\\
+D\'elai entre impulsions : 1 /mn\\
+D\'eclenchement: asynchrone\\	   
+Imp\'edance du r\'eseau : 12 Ohms \\
+Couplages: L-PE; N-PE; L-N-PE\\
+
+
+
+ \subsection{R\'esultats de test}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Classe} &\Large\textbf{ Tension}& \Large\textbf{ Commentaire}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+1 & +/- 0.5 kV&\Sexpr{TAB[31,3]}&\Sexpr{TAB[31,4]}&\Sexpr{TAB[31,5]}\\
+
+\hline
+ 2 & +/- 1 kV&\Sexpr{TAB[32,3]}&\Sexpr{TAB[32,4]}&\Sexpr{TAB[32,5]}\\
+
+\hline
+3 & +/- 2 kV&\Sexpr{TAB[33,3]}&\Sexpr{TAB[33,4]}&\Sexpr{TAB[33,5]}\\
+
+\hline
+X & +/- 3 -- 4 kV&\Sexpr{TAB[34,3]}&\Sexpr{TAB[34,4]}&\Sexpr{TAB[34,5]}\\
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+ \subsection{Conditions de test en mode diff\'erentiel}
+\noindent
+Niveau de tension : 0,5kV à 2kV\\
+Nombre d'impulsions appliqu\'ees : 5/ essai\\
+D\'elai entre impulsions : 1 /mn\\
+D\'eclenchement : asynchrone	   \\
+Imp\'edance du r\'eseau : 2 Ohms \\
+\\
+
+ \subsection{R\'esultats de test}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Classe} &\Large\textbf{ Tension}& \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+1 & +/- 0.5 kV&\Sexpr{TAB[35,3]}&\Sexpr{TAB[35,4]}&\Sexpr{TAB[35,5]}\\
+
+\hline
+ 2 & +/- 1 kV&\Sexpr{TAB[36,3]}&\Sexpr{TAB[36,4]}&\Sexpr{TAB[36,5]}\\
+
+
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+\newpage
+
+% EN 61000-4-5  - Partie 1 - Lignes d'interconnexions  --------------------------------------
+
+
+\section{Tests d'immunit\'e aux ondes de choc sur les lignes\\ d'interconnexion}
+\noindent
+Norme de base : EN 61000-4-5\\
+\\
+\noindent
+Equipement de test :  Profline système SCHAFFNER\\
+NSG 2050 avec tiroir PNW 2055 \\
+Onde de choc: 8/20$\mu$s\\
+Coupleur CDN 117, INA 170, 171, 174, Adaptateur INA 2055\\
+
+
+\subsection{Conditions de test}
+\noindent
+Suivant montage de test et mode op\'eratoire\\
+\\
+\noindent
+Niveau de tension : 0,5kV à 4kV\\
+Nb d'impulsions appliqu\'ees 5/ essai\\
+Temps de r\'ep\'etition de l'impulsion : 1 /mn\\
+D\'eclenchement: Asynchrone\\
+Imp\'edance du r\'eseau : 2 ohms\\
+Couplage : Mode commun ; 40 Ohms + 0,5$\mu$F\\
+\\
+
+\subsection{Essais sur les lignes d'interconnexion en mode commun}
+
+\subsubsection{Sur les entr\'ees d'alimentation TBTS}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Classe} &\Large\textbf{ Tension}& \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+1 & +/- 0.5 kV&\Sexpr{TAB[37,3]}&\Sexpr{TAB[37,4]}&\Sexpr{TAB[37,5]}\\
+
+\hline
+ 2 & +/- 1 kV&\Sexpr{TAB[38,3]}&\Sexpr{TAB[38,4]}&\Sexpr{TAB[38,5]}\\
+
+\hline
+ 3 & +/- 2 kV&\Sexpr{TAB[39,3]}&\Sexpr{TAB[39,4]}&\Sexpr{TAB[39,5]}\\
+ 
+\hline
+
+X & +/- 3 kV -- 4kV&\Sexpr{TAB[40,3]}&\Sexpr{TAB[40,4]}&\Sexpr{TAB[40,5]}\\
+ 
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+
+\subsubsection{Sur lignes autres lignes d'interconnexion}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Classe} &\Large\textbf{ Tension}& \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+1 & +/- 0.5 kV&\Sexpr{TAB[41,3]}&\Sexpr{TAB[41,4]}&\Sexpr{TAB[41,5]}\\
+
+\hline
+ 2 & +/- 1 kV&\Sexpr{TAB[42,3]}&\Sexpr{TAB[42,4]}&\Sexpr{TAB[42,5]}\\
+
+\hline
+ 3 & +/- 2 kV&\Sexpr{TAB[43,3]}&\Sexpr{TAB[43,4]}&\Sexpr{TAB[43,5]}\\
+ 
+ \hline
+
+X & +/- 3 kV -- 4kV&\Sexpr{TAB[44,3]}&\Sexpr{TAB[44,4]}&\Sexpr{TAB[44,5]}\\
+ 
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+\newpage
+
+
+
+
+
+% EN 61000-4-2  -    D\'echarge indirectes au contact
+
+\section{Tests d'immunit\'e aux d\'echarges \'electrostatiques}
+
+
+\subsection{D\'echarges indirectes au contact}
+\noindent
+Norme de base : EN 61000-4-2\\
+\\
+\noindent
+Equipement de test :  G\'en\'erateur Haefely PSB 25B\\
+Pistolet de test : Cd+Cs =150pF ; Rd=330 Ohms\\
+ \\
+ 
+ \subsubsection{Conditions de test}
+\noindent
+Suivant montage de test et mode op\'eratoire\\
+10 d\'echarges au contact par point sur plan horizontal\\ 
+10 d\'echarges au contact par point sur plan vertical\\
+\\
+\noindent
+Pour la localisation des points de test, voir \S{}20
+\\
+
+
+ \subsubsection{R\'esultats de test}
+ 
+ \textbf{Essai sur le plan horizontal}
+ 
+ 
+ \begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Points} &\Large\textbf{ Tension}& \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+1--4& +/- 4 kV&\Sexpr{TAB[46,3]}&\Sexpr{TAB[46,4]}&\Sexpr{TAB[46,5]}\\
+
+\hline
+1--4& +/- 5 kV&\Sexpr{TAB[47,3]}&\Sexpr{TAB[47,4]}&\Sexpr{TAB[47,5]}\\
+
+\hline
+1--4& +/- 6 kV&\Sexpr{TAB[48,3]}&\Sexpr{TAB[48,4]}&\Sexpr{TAB[48,5]}\\
+ 
+ \hline
+
+1--4& +/- 8 kV&\Sexpr{TAB[49,3]}&\Sexpr{TAB[49,4]}&\Sexpr{TAB[49,5]}\\
+ 
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+ 
+ \textbf{Essai sur le plan vertical}
+ 
+ 
+ \begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Points} &\Large\textbf{ Tension}& \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+1--4& +/- 4 kV&\Sexpr{TAB[50,3]}&\Sexpr{TAB[50,4]}&\Sexpr{TAB[50,5]}\\
+
+\hline
+1--4& +/- 5 kV&\Sexpr{TAB[51,3]}&\Sexpr{TAB[51,4]}&\Sexpr{TAB[51,5]}\\
+
+\hline
+1--4& +/- 6 kV&\Sexpr{TAB[52,3]}&\Sexpr{TAB[52,4]}&\Sexpr{TAB[52,5]}\\
+ 
+ \hline
+
+1--4& +/- 8 kV&\Sexpr{TAB[53,3]}&\Sexpr{TAB[53,4]}&\Sexpr{TAB[53,5]}\\
+ 
+\hline
+
+
+
+\end{tabular}
+\end{center}
+
+
+\newpage
+
+\subsection{D\'echarges directes}
+
+\subsubsection{Conditions de test}
+\noindent
+Suivant montage de test et mode op\'eratoire\\
+10 d\'echarges au contact par point \\
+10 d\'echarges par point dans l'air\\
+\\
+\noindent
+Pour la localisation des points de test, voir \S{}20
+\\
+\\
+
+% PHOTO DES POINTS DE TEST  ******************************************************************
+
+
+
+
+%*******************************************************************************************
+
+
+\subsubsection{R\'esultats de test}
+
+
+ \textbf{D\'echarge dans l'air}
+ 
+ \begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Points} &\Large\textbf{ Tension}& \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+\Sexpr{TAB[89,3]}& +/- 4 kV&\Sexpr{TAB[54,3]}&\Sexpr{TAB[54,4]}&\Sexpr{TAB[54,5]}\\
+
+\hline
+\Sexpr{TAB[89,3]}& +/- 8 kV&\Sexpr{TAB[55,3]}&\Sexpr{TAB[55,4]}&\Sexpr{TAB[55,5]}\\
+
+\hline
+\Sexpr{TAB[89,3]}& +/- 12 kV&\Sexpr{TAB[56,3]}&\Sexpr{TAB[56,4]}&\Sexpr{TAB[56,5]}\\
+ 
+ \hline
+
+\Sexpr{TAB[89,3]}& +/- 15 kV&\Sexpr{TAB[57,3]}&\Sexpr{TAB[57,4]}&\Sexpr{TAB[57,5]}\\
+ 
+\hline
+
+
+
+\end{tabular}
+\end{center}
+ 
+ 
+  \textbf{D\'echarge au contact}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Points} &\Large\textbf{ Tension}& \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+\Sexpr{TAB[89,3]}& +/- 4 kV&\Sexpr{TAB[58,3]}&\Sexpr{TAB[58,4]}&\Sexpr{TAB[58,5]}\\
+
+\hline
+\Sexpr{TAB[89,3]}& +/- 5 kV&\Sexpr{TAB[59,3]}&\Sexpr{TAB[59,4]}&\Sexpr{TAB[59,5]}\\
+
+\hline
+\Sexpr{TAB[89,3]}& +/- 6 kV&\Sexpr{TAB[60,3]}&\Sexpr{TAB[60,4]}&\Sexpr{TAB[60,5]}\\
+ 
+ \hline
+
+\Sexpr{TAB[89,3]}& +/- 8 kV&\Sexpr{TAB[61,3]}&\Sexpr{TAB[61,4]}&\Sexpr{TAB[61,5]}\\
+ 
+\hline
+
+\end{tabular}
+\end{center}
+ 
+
+
+\newpage
+
+% EN 61000-4-3  -    Test d'immunit\'e aux champs \'electromagn\'etiques rayonn\'es
+
+\section{ Test d'immunit\'e aux champs \'electromagn\'etiques rayonn\'es}
+\noindent
+Norme de base : EN 61000-4-3\\
+\\
+\noindent
+Equipement de test : \\
+G\'en\'erateur SML02 ROHDE \& SCHWARZ avec amplificateur WA1000\\
+Couplage avec antenne AS2 ; Sonde PCB ; Cellule TEM\\
+Sonde de champ H : PR 1000\\
+
+\subsection{Conditions de test}
+\noindent
+Suivant le montage d'essai et le mode op\'eratoire.\\
+Niveau : 3V/m ou 10V/m\\
+Fr\'equence : balayage de 30MHz à 1Ghz\\
+Modulation d'amplitude 80\% 1kHz sinusoîdal\\
+Essais sur trois axes\\
+\\
+
+\subsection{R\'esultats de test}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Niveau} & \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+3 V/m &\Sexpr{TAB[63,3]}&\Sexpr{TAB[63,4]}&\Sexpr{TAB[63,5]}\\
+
+\hline
+ 10V/m &\Sexpr{TAB[64,3]}&\Sexpr{TAB[64,4]}&\Sexpr{TAB[64,5]}\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+	
+\newpage
+
+% EN 61000-4-6  -    Test d'immunit\'e aux champs \'electromagn\'etiques conduits
+
+
+
+\section{ Test d'immunit\'e aux champs \'electromagn\'etiques conduits}
+\noindent
+Norme de base : EN 61000-4-6\\
+\\
+\noindent
+Equipement de test : \\ 
+G\'en\'erateur SML02 ROHDE \& SCHWARZ avec amplificateur MRF 80\\
+Couplage avec coupleur CDN 1 et att\'enuateur - 6 dB\\
+(Transformateur d'isolement pour couplage sur secteur)\\
+\\
+
+
+\subsection{Conditions de test}
+\noindent
+Suivant le montage d'essai et le mode op\'eratoire\\
+\\	
+Niveau : 140 dB$\mu$V / 10V rms ; 129.5 dB$\mu$V / 3V rms\\
+Fr\'equence : balayage de 0.15 MHz à 80 MHz\\
+Modulation d'amplitude 80 \% 1kHz sinusoîdal\\
+Modulation d'impulsion 1Hz 0.5s ON; 0.5s OFF\\
+\\
+
+
+\subsection{R\'esultats de test}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Niveau} & \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+140dB$\mu$V &\Sexpr{TAB[66,3]}&\Sexpr{TAB[66,4]}&\Sexpr{TAB[66,5]}\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+	
+\newpage
+
+% EN 61000-4-6  -    Test d'immunit\'e aux variations de tension
+
+\section{ Test d'immunit\'e aux variations de tension}
+\noindent
+Norme de base : EN 61000-4-11\\
+\\
+\noindent
+Equipement de test  108 : TMX SCHAFFNER\\
+Pilot\'e par le logiciel : NSG 1006\\
+\\
+
+\subsection{Conditions de test}
+\noindent
+Suivant le montage d'essai et mode op\'eratoire\\
+Niveau : 230V  +10\%, 230 V - 15\%
+
+\subsection{R\'esultats de test}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Niveau}&\large\textbf{Dur\'ee}& \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
++10\% &10 s&\Sexpr{TAB[68,3]}&\Sexpr{TAB[68,4]}&\Sexpr{TAB[68,5]}\\
+
+
+\hline
+
+\hline
+-15\% &10 s&\Sexpr{TAB[69,3]}&\Sexpr{TAB[69,4]}&\Sexpr{TAB[69,5]}\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+\newpage
+
+% EN 61000-4-6  -    Test d'immunit\'e aux chutes et creux de tension
+
+
+\section{ Test d'immunit\'e aux chutes et creux de tension}
+\noindent
+Norme de base : EN 61000-4-11\\
+\\
+\noindent
+Equipement de test : 108 TMX SCHAFFNER\\
+Pilot\'e par le logiciel: NSG 1006\\
+\\
+
+\subsection{Conditions de test}
+\noindent
+Suivant le montage d'essai et mode op\'eratoire\\
+\\
+Sur les entr\'ees d'alimentation du r\'eseau BT\\
+Dur\'ee des chutes de tension: 10 ; 20 ; 100 ; 200 ms \\
+Dur\'ee des creux de tension: 10 ; 20 ; 100 ms\\
+Nombre de r\'eductions : 3 /dur\'ee\\
+D\'elai entre deux r\'eductions : 10s\\
+\\
+
+
+\subsection{R\'esultats de test}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+
+\hline
+ \large\textbf{Niveau}&\large\textbf{Dur\'ee} & \Large\textbf{ Commentaires}&\Large\textbf{ Comportement}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+60\% &0,5; 1;5;10 p\'eriodes&\Sexpr{TAB[70,3]}&\Sexpr{TAB[70,4]}&\Sexpr{TAB[70,5]}\\
+
+
+\hline
+
+\hline
+100\% &0,5; 1; 5 p\'eriodes &\Sexpr{TAB[71,3]}&\Sexpr{TAB[71,4]}&\Sexpr{TAB[71,5]}\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+\newpage
+
+% MESURES D'EMISSIONS   ******************************
+
+% EMISSIONS RAYONNEES  
+
+\section{ Mesures d'\'emissions rayonn\'ees}
+\noindent
+Norme de base : EN 55022 Classe B\\
+\\
+Equipement de test :  EMIPACK3  SCHAFFNER\\
+R\'ecepteur:  SCR 3102 SHAFFNER ( 9kHz -- 2,6GHz )\\
+Pr\'eamplificateur : RP 1000  15dB\\
+Antenne : AS2\\
+\\
+\subsection{Conditions de test}
+\noindent
+Suivant le montage d'essai et mode op\'eratoire\\
+Filtre de bande : 120kHz\\
+Bande de fr\'equence analys\'ee : 30MHz  -- 1GHz\\
+Mesures en champ libre\\
+\\
+
+
+\subsection{R\'esultats de test}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+
+\hline
+ \large\textbf{Niveau}& \large\textbf{Polarit\'e}& \Large\textbf{ Commentaires}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+Voir graphe&Horizontale&\Sexpr{TAB[73,4]}&\Sexpr{TAB[73,5]}\\
+
+
+\hline
+Voir graphe&Verticale&\Sexpr{TAB[74,4]}&\Sexpr{TAB[74,5]}\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+\textbf{Mesures en polarit\'e horizontale}
+
+% Gaphe Horizontale
+\\
+\includegraphics[scale=1]{ERH.jpg}
+\\
+
+%\\
+%\includegraphics[scale=1]{ERH24AC.jpg}
+%\\
+
+
+
+%------------------------------------------------------------------------------------------------
+
+% Gaphe vertical
+\textbf{Mesures en polarit\'e verticale}
+\\
+\\
+\includegraphics[scale=1]{ERV.jpg}
+\\
+
+%\\
+%\includegraphics[scale=1]{ERV24AC.jpg}
+%\\
+\\
+\newpage
+
+
+
+%------------------------------------------------------------------------------------------------
+
+
+
+
+\newpage
+
+% EMISSIONS CONDUITES
+
+\section{ Mesures d'\'emissions conduites}
+\noindent
+Norme de base : 55022 Classe B\\
+\\
+\noindent
+Equipement de test :  EMIPACK3  SCHAFFNER\\
+R\'ecepteur : SCR 3102 SHAFFNER ( 9kHz -- 2,6GHz )\\
+Couplage avec R\'eseau : RSIL PD 30\\
+Bande de fr\'equence analys\'ee : 150kHz  -- 30MHz\\
+Transformateur d'isolement pour le couplage sur le secteur\\
+\\
+
+\subsection{Conditions de test}
+\noindent
+Suivant le montage d?essai et mode op\'eratoire\\
+Filtre de bande 9 kHz\\
+Fr\'equence : analyse de 0.15 MHz à 30 MHz\\
+\\
+
+
+\subsection{R\'esultats de test}
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+
+\hline
+ \large\textbf{Niveau}& \large\textbf{Polarit\'e}& \Large\textbf{ Commentaires}&\Large\textbf{ R\'esultat}\\
+ 
+\hline
+Voir graphe&Phase&\Sexpr{TAB[76,4]}&\Sexpr{TAB[76,5]}\\
+
+
+\hline
+Voir graphe&Neutre&\Sexpr{TAB[77,4]}&\Sexpr{TAB[77,5]}\\
+
+
+\hline
+
+\end{tabular}
+\end{center}
+
+\textbf{Mesures sur la phase}
+
+% Gaphe Phase
+
+\\
+\includegraphics[scale=1]{ECL.jpg}
+\\
+
+%\\
+%\includegraphics[scale=1]{ECL24AC.jpg}
+
+%------------------------------------------------------------------------------------------------
+
+
+\textbf{Mesures sur le neutre}
+
+% Gaphe Neutre
+\\
+\includegraphics[scale=1]{ECN.jpg}
+
+%\\
+%\includegraphics[scale=1]{ECN24AC.jpg}
+\\
+
+
+
+%------------------------------------------------------------------------------------------------
+
+
+\newpage
+
+
+% RECAPITULATIF DES RESULTATS D'ESSAIS
+
+% Tableau de tous les essais  --------------------------------------------------------------------------------------------------------
+
+\section{ R\'ecapitulatif des r\'esultats d'essais et avis de conformit\'e}
+
+\vspace{1.5cm}
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+
+\hline
+ \large\textbf{Essais} &\Large\textbf{ Proc\'edure} & \Large\textbf{ R\'esultats}\\
+ 
+ \hline
+ \multicolumn {3}{|c|}{\bf Tests d'immunit\'e}\\
+ 
+\hline
+1. Transistoire rapides en salves & EN 61000-4-4&\Sexpr{TAB[79,3]}\\
+
+\hline
+2. Ondes de choc&EN 61000-4-5&\Sexpr{TAB[80,3]}\\
+
+\hline
+3. D\'echarges \'electrostatiques&EN 61000-4-2&\Sexpr{TAB[81,3]}\\
+\hline
+
+4. Immunit\'e aux champs rayonn\'es&EN 61000-4-3&\Sexpr{TAB[82,3]}\\
+\hline
+
+
+5. Immunit\'e aux champs conduits&EN 61000-4-6&\Sexpr{TAB[83,3]}\\
+\hline
+
+6. Immunit\'e aux variations de tensions&EN 61000-4-11&\Sexpr{TAB[84,3]}\\
+\hline
+
+ \hline
+\multicolumn {3}{|c|}{\bf Mesures d'\'emissions}\\
+  \hline
+  
+ 7. Emissions rayonn\'ees&EN 55022&\Sexpr{TAB[85,3]}\\
+ \hline
+ 
+ 8. Emissions conduites&EN 55022&\Sexpr{TAB[86,3]}\\
+\hline
+
+\hline
+\multicolumn {3}{|c|}{\bf Autres tests}\\
+  \hline
+  
+ 9. Harmoniques de courant&EN 61000-3-2&\Sexpr{TAB[87,3]}\\
+\hline
+
+ 10. Fluctuation de tension, flickers&EN 61000-3-3&\Sexpr{TAB[88,3]}\\
+\hline
+
+\end{tabular}
+
+\end{center}
+
+\vspace{1.0cm}
+
+Le \textbf{\Sexpr{TAB[1,3]}} \Sexpr{res} 
+
+% FIN tableau de tous les essais
+
+\newpage
+
+ % DOCUMENTS PHOTOGRAPHIQUES
+ 
+ 
+\section{Documents photographiques}
+ 
+
+\\
+
+\center
+\includegraphics[scale=1]{1.jpg}
+\\
+\includegraphics[scale=1]{11.jpg}
+\\
+\includegraphics[scale=1]{12.jpg}
+\\
+\\
+
+\caption{Fig 1 -- Photos du clavier PROFIL100EC}
+
+
+\includegraphics[scale=1]{2.jpg}
+\\
+\caption{Fig 2 -- Boitier \'electronique d\'eport\'e}
+
+\includegraphics[scale=1]{21.jpg}
+\\
+\caption{Fig 3 -- Carte \'electronique dans le boitier d\'eport\'e}
+\\
+\includegraphics[scale=1]{22.jpg}
+\\
+\caption{Fig 4 -- Carte \'electronique face composants}
+\\
+\includegraphics[scale=1]{23.jpg}
+\\
+\caption{Fig 5 -- Carte \'electronique face soudures}
+\\
+
+\newpage
+
+
+\includegraphics[scale=1]{4-4BT.jpg}
+\\
+\caption{Fig 6 -- Essai d'immunit\'e aux transitoires rapides en salves sur les entr\'ees BT}
+
+\\
+
+%\includegraphics[scale=1]{4-4LI.jpg}
+%\\
+%\caption{Fig 4 -- Essai d'immunit\'e aux transitoires rapides en salves sur lignes d'interconnexions}
+
+\\
+
+\includegraphics[scale=1]{55C.jpg}
+\\
+\caption{Fig 7 -- Emissions conduites}
+
+\newpage
+
+
+
+
+\includegraphics[scale=1]{4-2.jpg}
+\\
+\caption{Fig 8 -- Essai d'immunit\'e aux d\'echarges \'electrostatiques}
+
+\newpage
+
+
+\\
+\includegraphics[scale=1]{4-2pts.jpg}
+\\
+\caption{Fig 9 -- Localisation des points pour l'essai d'ESD}
+\newpage
+
+
+\\
+
+
+\includegraphics[scale=0.5]{4-5LI.jpg}
+\\
+\caption{Fig 11 -- Essai d'immunit\'e aux ondes de choc sur les lignes d'interconnexion}
+
+\includegraphics[scale=0.5]{4-6.jpg}
+\\
+\caption{Fig 12 -- Essai d'immunit\'e aux champs \'electromagn\'etiques conduits}
+ 
+ 
+\includegraphics[scale=0.5]{4-3.jpg}
+
+\caption{Fig 13 -- Essai d'immunit\'e aux champs \'electromagn\'etiques rayonn\'es}
+
+
+
+\end{document}
+
